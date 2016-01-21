@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.unicom.dao.UnicomBaseScenicMapper">
+
+	<!-- cache / 暂时去掉缓存，等后台可以操作的时候再加上缓存 -->
+
+	<!-- 景区列表 -->
+	<select id="queryScenic" parameterType="com.unicom.vo.UnicomBaseScenicVO"
+		resultType="com.unicom.vo.UnicomBaseScenicVO">
+		SELECT
+			id,
+			scenicName,
+			longitude,
+			latitude,
+			c1,
+			c2,
+			c3,
+			c4
+		FROM
+		unicom_base_scenic_csv
+	</select>
+	
+	
+	<resultMap  id="base_roadpoint" type="com.unicom.vo.UnicomBaseRoadpointVO">
+		<result column="b_id" property="id"/>
+		<result column="roadName" property="roadName"/>
+		<result column="linkName" property="linkName"/>
+		<result column="longlat" property="longlat"/>
+     </resultMap>
+     
+     <resultMap  id="resultRoad" type="com.unicom.vo.UnicomResultRoadVO">
+		<result column="id" property="id"/>
+		<result column="Velocity" property="velocity"/>
+		<result column="rn" property="roadName"/>
+		<result column="startTime" property="startTime"/>
+		<result column="endtime" property="endTime"/>
+		<association property="unicomBaseRoadpointVO" column="sectionid" resultMap="base_roadpoint"/>  
+     </resultMap>
+	
+	<!-- 道路路况 -->
+	<select id="queryRoad" resultMap="resultRoad" parameterType="com.unicom.vo.UnicomResultRoadVO">
+		SELECT
+			a.id,
+			a.Velocity,
+			b.roadName as rn,
+			a.startTime,
+			a.endtime,
+			b.id as b_id,
+			b.roadName,
+			b.linkname,
+			b.longlat
+		FROM
+		unicom_result_road a
+		left join unicom_base_roadpoint_csv b on
+		a.sectionid = b.id
+		where 1=1 
+		
+		<if test="roadName !=null">
+			AND b.roadName = #{roadName}
+		</if>
+		
+		<if test="cdEndTime !=null ">
+			AND a.endtime = #{cdEndTime}
+		</if>
+		
+		<if test="cdEndTime ==null ">
+			AND a.endTime = (select max(endTime) from unicom_result_road )
+		</if>
+	</select>
+	
+	<resultMap  id="base_scenic" type="com.unicom.vo.UnicomBaseScenicVO">
+		<id column="b_id" property="id"/>
+		<result column="scenicName" property="scenicName"/>
+		<result column="b_longitude" property="longitude"/>
+		<result column="b_latitude" property="latitude"/>
+		<result column="c1" property="c1"/>
+		<result column="c2" property="c2"/>
+		<result column="c3" property="c3"/>
+		<result column="c4" property="c3"/>
+     </resultMap>
+     
+     <resultMap  id="resultScenicBscover" type="com.unicom.vo.UnicomResultScenicBscoverVO">
+		<id column="id" property="id"/>
+		<result column="coverNumber" property="coverNumber"/>
+		<result column="startTime" property="startTime"/>
+		<result column="endtime" property="endTime"/>
+		<result column="longitude" property="longitude"/>
+		<result column="latitude" property="latitude"/>
+		<association property="unicomBaseScenicVO" column="scenicId" resultMap="base_scenic"/>  
+     </resultMap>
+     
+	<!-- 基站数量分析 -->
+	<select id="queryScenicBscover" resultMap="resultScenicBscover" parameterType="com.unicom.vo.UnicomResultScenicBscoverVO">
+		SELECT
+			a.id as id,
+			a.coverNumber as coverNumber,
+			a.longitude as longitude,
+			a.latitude as latitude,
+			a.startTime,
+			a.endtime,
+			b.id as b_id,
+			b.c1 as c1,
+			b.c2 as c2,
+			b.c3 as c3,
+			b.c4 as c4,
+			b.scenicName as scenicName,
+			b.longitude as b_longitude,
+			b.latitude as b_latitude
+		FROM
+		unicom_result_scenic_bscover a
+		left join unicom_base_scenic_csv b on
+		a.scenicId = b.id
+		where 1=1 
+		
+		<if test="cdScenicId !=null">
+			AND a.scenicId = #{cdScenicId}  
+		</if>
+		
+	
+		<if test="cdEndTime !=null ">
+			AND a.endtime =  #{cdEndTime}
+		</if>
+		
+		<if test="cdEndTime ==null ">
+			AND a.endTime = (select max(endTime) from unicom_result_scenic_bscover )
+		</if>
+	</select>
+	
+	
+	 <resultMap  id="resultResultScenicInout" type="com.unicom.vo.UnicomResultScenicInoutVO">
+		<result column="id" property="id"/>
+		<result column="inNumber" property="inNumber"/>
+		<result column="outNumber" property="outNumber"/>
+		<result column="startTime" property="startTime"/>
+		<result column="endtime" property="endTime"/>
+		<association property="unicomBaseScenicVO" column="scenicId" resultMap="base_scenic"/>  
+     </resultMap>
+	
+	<!--景区出入分析 -->
+		<select id="queryScenicInout"  parameterType="com.unicom.vo.UnicomResultScenicInoutVO" resultType="com.unicom.vo.UnicomResultScenicInoutVO">
+		SELECT
+			count(a.inNumber) as inNumber,
+			count(a.outNumber) as outNumber,
+			<if test="type==1">
+				DATE_FORMAT(a.endtime,'%Y%m%d') as reTime
+			</if>
+			<if test="type==2">
+				DATE_FORMAT(a.endtime,'%Y%m%d %H') as reTime
+			</if>
+		FROM
+		unicom_result_scenic_inout a
+		where 1=1 
+		<if test="cdScenicId !=null">
+			AND a.scenicId = #{cdScenicId}  
+		</if>
+		<if test="type==2">
+				AND DATE_FORMAT(a.endtime,'%Y%m%d') = #{cdEndTime} 
+		</if>
+		  group by reTime
+	</select>
+	
+	<resultMap  id="base_cityinfo" type="com.unicom.vo.UnicomBaseCityinfoVO">
+		<result column="zipCode" property="zipCode"/>
+		<result column="cityName" property="cityName"/>
+		<result column="c_longitude" property="longitude"/>
+		<result column="c_latitude" property="latitude"/>
+    </resultMap>
+    
+     <resultMap  id="resultResultAttribution" type="com.unicom.vo.UnicomResultScenicAttributionVO">
+		<result column="id" property="id"/>
+		<result column="attriNumber" property="attriNumber"/>
+		<result column="startTime" property="startTime"/>
+		<result column="endtime" property="endTime"/>
+		<association property="unicomBaseScenicVO" column="scenicId" resultMap="base_scenic"/>  
+		<association property="unicomBaseCityinfoVO" column="cityId" resultMap="base_cityinfo"/>  
+     </resultMap>
+     
+	<!--归属地分析 -->
+	<select id="queryScenicAttribution" resultMap="resultResultAttribution" parameterType="com.unicom.vo.UnicomResultScenicAttributionVO">
+		SELECT
+			a.id,
+			a.attriNumber,
+			a.startTime,
+			a.endtime,
+			b.id as b_id,
+			b.c1 as c1,
+			b.c2 as c2,
+			b.c3 as c3,
+			b.c4 as c4,
+			b.scenicName as scenicName,
+			b.longitude as b_longitude,
+			b.latitude as b_latitude,
+			city.cityName,
+			city.longitude as c_longitude,
+			city.latitude as c_latitude
+		FROM
+		unicom_result_scenic_attribution a
+		left join unicom_base_scenic_csv b on
+		a.scenicId = b.id
+		join unicom_base_cityinfo_csv city on a.cityId=city.zipCode
+		where 1=1 
+		<if test="cdScenicId !=null">
+			AND a.scenicId = #{cdScenicId}  
+		</if>
+		
+		<if test="cdStartTime !=null and cdEndTime !=null ">
+			AND a.endtime  between #{cdStartTime} and  #{cdEndTime}
+		</if>
+		
+		<if test="cdStartTime ==null || cdEndTime ==null ">
+			AND a.endTime = (select max(endTime) from unicom_result_scenic_attribution )
+		</if>
+		order by a.attriNumber desc limit 10 
+	</select>
+	
+</mapper>

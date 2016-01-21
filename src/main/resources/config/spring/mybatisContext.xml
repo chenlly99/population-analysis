@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+    http://mybatis.org/schema/mybatis-spring
+    http://mybatis.org/schema/mybatis-spring.xsd"
+	default-lazy-init="true">
+
+	<context:property-placeholder location="classpath:config/db/dbConfig.properties" />
+	 
+    <mybatis:scan base-package="com.unicom"/>
+    
+	<!-- 数据源配置 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="minIdle" value="${jdbc.minIdle}" />         <!-- 队列中的最小等待数 -->  
+        <property name="maxIdle" value="${jdbc.maxIdle}" />         <!-- 队列中的最大等待数 -->  
+        <property name="maxWait" value="${jdbc.maxWait}" />         <!-- 最长等待时间，单位毫秒 -->  
+        <property name="maxActive" value="${jdbc.maxActive}" />     <!-- 最大活跃数 -->  
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- AOP配置事物 -->  
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">  
+        <tx:attributes>  
+            <tx:method name="query*" read-only="true" propagation="REQUIRED" />  
+            <tx:method name="select*" read-only="true" propagation="REQUIRED" />  
+            <tx:method name="delete*"  propagation="REQUIRED" />  
+            <tx:method name="update*" propagation="REQUIRED" />  
+            <tx:method name="insert*" propagation="REQUIRED" />  
+            <tx:method name="*" propagation="REQUIRED" />  
+        </tx:attributes>  
+    </tx:advice>  
+      
+	<!-- 配置AOP切面   -->
+    <aop:config>  
+        <aop:pointcut id="transactionPointcut" expression="execution(* com.unicom..service.*.*(..))"/>  
+        <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>  
+    </aop:config> 
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- MyBatis配置文件  -->
+ 		<property name="configLocation" value="classpath:config/db/mybatis-config.xml"></property>
+				<property name="mapperLocations" value="classpath*:com/unicom/**/*Mapper.xml" />
+	</bean>
+</beans>
