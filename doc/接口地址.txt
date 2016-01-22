@@ -1,0 +1,30 @@
+#景区列表接口
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/scenicList
+
+#景区基站覆盖的人数
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicBscover
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicBscover?cdScenicId=1 显示某一个景区的
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicBscover?cdScenicId=1&cdEndTime=2016-01-20 09:40:00 历史
+
+#景区归属地分布
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/computeAttribution 
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/computeAttribution?cdScenicId=1 
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/computeAttribution?cdScenicId=1&cdEndTime=2016-01-20 09:40:00  历史
+
+
+#景区人流到达离开数目,type=1 按天统计，type=2 按某一天的小时统计
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicInout?scenicId=1&type=1  按天
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicInout?scenicId=1&type=2&cdEndTime=20160119  某天小时
+
+#道路
+实时
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultRoad
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultRoad?cdlink=s16-01-up 显示某一个条道路
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultRoad?&cdEndTime=2016-01-20 09:40:00 历史
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultRoad?cdlink=s16-01-up&cdEndTime=2016-01-20 09:40:00 历史某一条道路
+
+
+
+http://27.223.95.246:8080/index.html
+
+27.223.95.246  用户名：administrator  密码:hisense.1
