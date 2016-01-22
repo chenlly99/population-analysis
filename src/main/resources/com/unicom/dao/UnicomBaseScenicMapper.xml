@@ -141,8 +141,8 @@
 	<!--景区出入分析 -->
 		<select id="queryScenicInout"  parameterType="com.unicom.vo.UnicomResultScenicInoutVO" resultType="com.unicom.vo.UnicomResultScenicInoutVO">
 		SELECT
-			count(a.inNumber) as inNumber,
-			count(a.outNumber) as outNumber,
+			sum(a.inNumber) as inNumber,
+			sum(a.outNumber) as outNumber,
 			<if test="type==1">
 				DATE_FORMAT(a.endtime,'%Y%m%d') as reTime
 			</if>
@@ -155,10 +155,16 @@
 		<if test="cdScenicId !=null">
 			AND a.scenicId = #{cdScenicId}  
 		</if>
+		<if test="cdStartTime !=null and cdEndTime !=null ">
+			AND a.endtime  between #{cdStartTime} and  #{cdEndTime}
+		</if>
+		<if test="type==1">
+				 group by reTime order by reTime asc limit 10
+		</if>
 		<if test="type==2">
 				AND DATE_FORMAT(a.endtime,'%Y%m%d') = #{cdEndTime} 
+				group by reTime order by reTime asc
 		</if>
-		  group by reTime
 	</select>
 	
 	<resultMap  id="base_cityinfo" type="com.unicom.vo.UnicomBaseCityinfoVO">
@@ -205,8 +211,8 @@
 			AND a.scenicId = #{cdScenicId}  
 		</if>
 		
-		<if test="cdStartTime !=null and cdEndTime !=null ">
-			AND a.endtime  between #{cdStartTime} and  #{cdEndTime}
+		<if test="cdEndTime !=null ">
+			AND a.endtime =  #{cdEndTime}
 		</if>
 		
 		<if test="cdStartTime ==null || cdEndTime ==null ">
