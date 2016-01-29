@@ -159,11 +159,11 @@
 			AND a.endtime  between #{cdStartTime} and  #{cdEndTime}
 		</if>
 		<if test="type==1">
-				 group by reTime order by reTime asc limit 10
+				 group by reTime order by reTime desc limit 10
 		</if>
 		<if test="type==2">
 				AND DATE_FORMAT(a.endtime,'%Y%m%d') = #{cdEndTime} 
-				group by reTime order by reTime asc
+				group by reTime order by reTime desc
 		</if>
 	</select>
 	
