@@ -163,7 +163,7 @@
 		</if>
 		<if test="type==2">
 				AND DATE_FORMAT(a.endtime,'%Y%m%d') = #{cdEndTime} 
-				group by reTime order by reTime desc
+				group by reTime order by reTime asc
 		</if>
 	</select>
 	
