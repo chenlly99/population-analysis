@@ -15,8 +15,9 @@ public class UnicomBaseScenicVO {
 	
 	private String id; // 内部唯一ID
 	private String scenicName;
-	private double longitude;
+	private double longitude; //景区中心点经纬度
 	private double  latitude;
+	private String shape; //景区形状
 	private int c1;
 	private int c2;
 	private int c3;
@@ -46,6 +47,16 @@ public class UnicomBaseScenicVO {
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
+	
+	
+	public String getShape() {
+		return shape;
+	}
+	public void setShape(String shape) {
+		this.shape = shape;
+	}
+	
+	
 	public int getC1() {
 		return c1;
 	}

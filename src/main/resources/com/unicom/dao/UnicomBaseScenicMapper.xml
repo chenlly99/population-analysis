@@ -14,6 +14,7 @@
 			scenicName,
 			longitude,
 			latitude,
+			shape,
 			c1,
 			c2,
 			c3,
@@ -75,6 +76,7 @@
 		<result column="scenicName" property="scenicName"/>
 		<result column="b_longitude" property="longitude"/>
 		<result column="b_latitude" property="latitude"/>
+		<result column="shape" property="shape"/>
 		<result column="c1" property="c1"/>
 		<result column="c2" property="c2"/>
 		<result column="c3" property="c3"/>
@@ -107,7 +109,8 @@
 			b.c4 as c4,
 			b.scenicName as scenicName,
 			b.longitude as b_longitude,
-			b.latitude as b_latitude
+			b.latitude as b_latitude,
+			b.shape
 		FROM
 		unicom_result_scenic_bscover a
 		left join unicom_base_scenic_csv b on
