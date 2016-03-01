@@ -218,7 +218,7 @@
 			AND a.endtime =  #{cdEndTime}
 		</if>
 		
-		<if test="cdStartTime ==null || cdEndTime ==null ">
+		<if test="cdEndTime ==null ">
 			AND a.endTime = (select max(endTime) from unicom_result_scenic_attribution )
 		</if>
 		order by a.attriNumber desc limit 10 
