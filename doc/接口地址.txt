@@ -1,30 +1,50 @@
-#¾°ÇøÁĞ±í½Ó¿Ú
+#æ™¯åŒºåˆ—è¡¨æ¥å£
 http://221.122.36.83:8080/population-analysis-1.0.1/unicom/scenicList
 
-#¾°Çø»ùÕ¾¸²¸ÇµÄÈËÊı
+#æ™¯åŒºåŸºç«™è¦†ç›–çš„äººæ•°
 http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicBscover
-http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicBscover?cdScenicId=1 ÏÔÊ¾Ä³Ò»¸ö¾°ÇøµÄ
-http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicBscover?cdScenicId=1&cdEndTime=2016-01-20 09:40:00 ÀúÊ·
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicBscover?cdScenicId=1 æ˜¾ç¤ºæŸä¸€ä¸ªæ™¯åŒºçš„
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicBscover?cdScenicId=1&cdEndTime=2016-01-20 09:40:00 å†å²
 
-#¾°Çø¹éÊôµØ·Ö²¼
+#æ™¯åŒºå½’å±åœ°åˆ†å¸ƒ
 http://221.122.36.83:8080/population-analysis-1.0.1/unicom/computeAttribution 
 http://221.122.36.83:8080/population-analysis-1.0.1/unicom/computeAttribution?cdScenicId=1 
-http://221.122.36.83:8080/population-analysis-1.0.1/unicom/computeAttribution?cdScenicId=1&cdEndTime=2016-01-20 09:40:00  ÀúÊ·
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/computeAttribution?cdScenicId=1&cdEndTime=2016-01-20 09:40:00  å†å²
 
 
-#¾°ÇøÈËÁ÷µ½´ïÀë¿ªÊıÄ¿,type=1 °´ÌìÍ³¼Æ£¬type=2 °´Ä³Ò»ÌìµÄĞ¡Ê±Í³¼Æ
-http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicInout?scenicId=1&type=1  °´Ìì
-http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicInout?scenicId=1&type=2&cdEndTime=20160119  Ä³ÌìĞ¡Ê±
+#æ™¯åŒºäººæµåˆ°è¾¾ç¦»å¼€æ•°ç›®,type=1 æŒ‰å¤©ç»Ÿè®¡ï¼Œtype=2 æŒ‰æŸä¸€å¤©çš„å°æ—¶ç»Ÿè®¡
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicInout?scenicId=1&type=1  æŒ‰å¤©
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultScenicInout?scenicId=1&type=2&cdEndTime=20160119  æŸå¤©å°æ—¶
 
-#µÀÂ·
-ÊµÊ±
+#é“è·¯
+å®æ—¶
 http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultRoad
-http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultRoad?cdlink=s16-01-up ÏÔÊ¾Ä³Ò»¸öÌõµÀÂ·
-http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultRoad?&cdEndTime=2016-01-20 09:40:00 ÀúÊ·
-http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultRoad?cdlink=s16-01-up&cdEndTime=2016-01-20 09:40:00 ÀúÊ·Ä³Ò»ÌõµÀÂ·
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultRoad?cdlink=s16-01-up æ˜¾ç¤ºæŸä¸€ä¸ªæ¡é“è·¯
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultRoad?&cdEndTime=2016-01-20 09:40:00 å†å²
+http://221.122.36.83:8080/population-analysis-1.0.1/unicom/resultRoad?cdlink=s16-01-up&cdEndTime=2016-01-20 09:40:00 å†å²æŸä¸€æ¡é“è·¯
 
 
 
 http://27.223.95.246:8080/index.html
 
-27.223.95.246  ÓÃ»§Ãû£ºadministrator  ÃÜÂë:hisense.1
+27.223.95.246  ç”¨æˆ·åï¼šadministrator  å¯†ç :hisense.1
+
+
+
+
+QQ:3159610833  guolusong0501 guo19840501
+
+å¤‡æ¡ˆï¼š3159610833@qq.com    guo19840501
+
+
+æ”¯ä»˜å®/é˜¿é‡Œäº‘
+15210575052ï¼šguolusong0501
+
+IPï¼š123.56.232.170
+æœåŠ¡å™¨ï¼šadministratorï¼š(GUO)lusong0501
+
+åŸŸåï¼šwww.lusongty.com
+
+http://123.56.232.170:8080/lusong/index.jsp
+http://123.56.232.170:8080/lusong/admin/login.jsp
+å¾®ä¿¡å…¬ä¼—å·ï¼šä¸æ¾åŒæ¸¸
