@@ -16,6 +16,7 @@ public class UnicomBaseRoadpointVO {
 	private String id; // 内部唯一ID
 	private String roadName;
 	private String linkName;
+	private String margin;
 	private String longlat;
 	public String getId() {
 		return id;
@@ -34,6 +35,13 @@ public class UnicomBaseRoadpointVO {
 	}
 	public void setLinkName(String linkName) {
 		this.linkName = linkName;
+	}
+	
+	public String getMargin() {
+		return margin;
+	}
+	public void setMargin(String margin) {
+		this.margin = margin;
 	}
 	public String getLonglat() {
 		return longlat;
